@@ -1,6 +1,6 @@
 # Informative Title for the Project
 
-TODO
+Python to Java Translator
 
 ## Add Your Name(s)
 
@@ -10,7 +10,7 @@ TODO
 
 ## Description of the Main Idea
 
-TODO
+We will create a translator that accepts Python code and outputs a version that has been translated to Java. The resulting Java program will have the same output and exact same functionality as the original Python program.
 
 ## Description of the Tasks that You Will Complete
 
