@@ -4,7 +4,9 @@ TODO
 
 ## Add Your Name(s)
 
-TODO
+- Daniel
+- Bergas 
+- Ben 
 
 ## Description of the Main Idea
 
