@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "translator"
+version = "0.1.0"
+description = ""
+authors = ["Bergas Anargya <anargya01@allegheny.edu>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+typer = {extras = ["all"], version = "^0.3.2"}
+rich = "^10.9.0"
