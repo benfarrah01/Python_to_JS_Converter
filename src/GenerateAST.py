@@ -17,6 +17,19 @@ operator_map = {
     ast.FloorDiv: '//'
 }
 
+js_ops = {
+    ast.Eq: '=', 
+    ast.NotEq: '!=',
+    ast.Lt: '<',
+    ast.LtE: '<=',
+    ast.Gt: '>',
+    ast.GtE: '>=',
+    ast.Is: '===',
+    ast.IsNot: '!==',
+    ast.In: 'In',
+    ast.NotIn: 'not in'
+}
+
 def node_translation(node):
     if isinstance(node, ast.Module):
         return {'type': 'Program', 'body': [node_translation(child) for child in node.body]} 
@@ -52,6 +65,15 @@ def node_translation(node):
         return {'type': 'LogicalExpression', 'operator': operator, 'left': node_translation(node.values[0]), 'right': node_translation(node.values[1])}
     elif isinstance(node, ast.BinOp):
         return {'type': 'BinaryExpression', 'operator': operator_map[node.op.__class__], 'left': node_translation(node.left), 'right': node_translation(node.right)}
+    elif isinstance(node, ast.Compare):
+        left = node_translation(node.left)
+        right = node_translation(node.comparators[0])
+        op = js_ops[node.ops[0]]
+        for i in range(1, len(node.ops)):
+            op_node = node.ops[i]
+            right_node = node.comparators[1]
+            op = f'{op} {js_ops[type(op_node)]} {node_translation(right_node)}'
+        return {'type': 'BinaryExpression', 'left': left, 'operator': op, 'right': right}
     else:
         raise Exception(f'Unsupported node type: {type(node).__name__}')
     
