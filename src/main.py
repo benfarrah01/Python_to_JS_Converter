@@ -40,3 +40,35 @@ def generate_code(node):
     else:
         raise NotImplementedError(f'Unsupported node type: {node["type"]}')
 
+# Sample JavaScript AST as a Python dictionary
+ast_node = {
+    'type': 'Program',
+    'body': [
+        {
+            'type': 'VariableDeclaration',
+            'kind': 'let',
+            'declarations': [
+                {
+                    'type': 'VariableDeclarator',
+                    'id': {'type': 'Identifier', 'name': 'x'},
+                    'init': {'type': 'Literal', 'value': 42},
+                },
+            ],
+        },
+        {
+            'type': 'ExpressionStatement',
+            'expression': {
+                'type': 'CallExpression',
+                'callee': {'type': 'Identifier', 'name': 'console.log'},
+                'arguments': [
+                    {'type': 'Identifier', 'name': 'x'},
+                ],
+            },
+        },
+    ],
+}
+
+# Generate JavaScript code from the AST
+code = generate_code(ast_node)
+
+print(code)
