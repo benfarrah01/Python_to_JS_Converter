@@ -1,5 +1,7 @@
 import sys
-import scanning
+import ast
+#import scanning
+import GenerateAST
 from pathlib import Path
 
 def main():
@@ -7,9 +9,12 @@ def main():
     python_path = Path(python_file)
     if python_path.is_file():
         python_text = python_path.read_text().splitlines()
+        tree = ast.parse(python_path.read_text())
+        js_ast = GenerateAST.node_translation(tree)
+        print(js_ast)
         #print(python_text)
-        my_scanner = scanning.scanner(python_text)
-        my_scanner.scan()
+        #my_scanner = scanning.scanner(python_text)
+        #my_scanner.scan()
         
 
 if __name__ == "__main__":
