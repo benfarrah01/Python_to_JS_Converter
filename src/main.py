@@ -15,7 +15,7 @@ def main():
         #print(python_text)
         #my_scanner = scanning.scanner(python_text)
         #my_scanner.scan()
-        
+      
 
 if __name__ == "__main__":
     main()
@@ -69,6 +69,6 @@ ast_node = {
 }
 
 # Generate JavaScript code from the AST
-code = generate_code(ast_node)
+code = generate_code(js_ast)
 
 print(code)
