@@ -168,6 +168,21 @@ def node_translation(node):
             "elements": [node_translation(element) for element in node.elts],
         }
 
+    elif isinstance(node, ast.UnaryOp):
+        return {
+            "type": "UnaryExpression",
+            "operator": operator_map[node.op.__class__],
+            "argument": node_translation(node.operand),
+        }
+
+    elif isinstance(node, ast.Subscript):
+        return {
+            "type": "MemberExpression",
+            "object": node_translation(node.value),
+            "property": node_translation(node.slice),
+            "computed": True,
+        }
+
     else:
         raise Exception(f"Unsupported node type: {type(node).__name__}")
 
