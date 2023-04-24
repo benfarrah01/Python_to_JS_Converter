@@ -89,7 +89,11 @@ def node_translation(node):
             op = f'{op} {js_ops[type(op_node)]} {node_translation(right_node)}'
         return {'type': 'BinaryExpression', 'left': left, 'operator': op, 'right': right}
     elif isinstance(node, ast.For):
-        return {'type': 'ForStatement', 'init': node_translation(node.target)}
+        return {'type': 'ForStatement', 
+                'init': node_translation(node.target), 
+                'test': node_translation(node.iter), 
+                'body': [node_translation(child) for child in node.body], 
+                'update': None}
     # Assign 
     elif isinstance(node, ast.Assign):
         return {
