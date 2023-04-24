@@ -90,18 +90,26 @@ def node_translation(node):
         return {'type': 'BinaryExpression', 'left': left, 'operator': op, 'right': right}
     elif isinstance(node, ast.For):
         return {'type': 'ForStatement', 'init': node_translation(node.target)}
+    # Assign 
+    elif isinstance(node, ast.Assign):
+        return {
+            'type': 'AssignmentExpression',
+            'operator': '=',
+            'left': node_translation(node.targets[0]),
+            'right': node_translation(node.value)
+        }
     else:
         raise Exception(f'Unsupported node type: {type(node).__name__}')
     
 
-# Example source code
-source_code = """
-def greet(name):
-    print(f'Hello, {name}!')
+# # Example source code
+# source_code = """
+# def greet(name):
+#     print(f'Hello, {name}!')
     
-greet('World')"""
+# greet('World')"""
 
-tree = ast.parse(source_code)
-js_ast = node_translation(tree)
-print(js_ast)
+# tree = ast.parse(source_code)
+# js_ast = node_translation(tree)
+# print(js_ast)
 
