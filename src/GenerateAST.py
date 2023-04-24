@@ -42,10 +42,10 @@ def node_translation(node):
         return {'type': 'ReturnStatement', 'argument': node_translation(node.value)}
     # Expression statements, checks for expression of statemtn
     elif isinstance(node, ast.Expr):
-        return{'type': 'ExpressionStatement', 'expression': node_translation(node.value)}
+        return {'type': 'ExpressionStatement', 'expression': node_translation(node.value)}
     # Call Expression, checks for callee, arguments inside of callee
     elif isinstance(node, ast.Call):
-        return{'type': 'CallExpression', 'callee': node_translation(node.func), 'arguments': [node_translation(arg) for arg in node.args]}
+        return {'type': 'CallExpression', 'callee': node_translation(node.func), 'arguments': [node_translation(arg) for arg in node.args]}
     # Name of node, regardless of the instance of the name
     elif isinstance(node, ast.Name):
         return {'type': 'Identifier', 'name': node.id}
@@ -88,6 +88,8 @@ def node_translation(node):
             right_node = node.comparators[1]
             op = f'{op} {js_ops[type(op_node)]} {node_translation(right_node)}'
         return {'type': 'BinaryExpression', 'left': left, 'operator': op, 'right': right}
+    elif isinstance(node, ast.For):
+        return {'type': 'ForStatement', 'init': node_translation(node.target)}
     else:
         raise Exception(f'Unsupported node type: {type(node).__name__}')
     
