@@ -153,6 +153,15 @@ def node_translation(node):
     elif isinstance(node, ast.Continue):
         return {"type": "ContinueStatement"}
 
+    # If statements
+    elif isinstance(node, ast.If):
+        return {
+            "type": "IfStatement",
+            "test": node_translation(node.test),
+            "consequent": [node_translation(child) for child in node.body],
+            "alternate": node_translation(node.orelse[0]) if node.orelse else None,
+        }
+
     else:
         raise Exception(f"Unsupported node type: {type(node).__name__}")
 
