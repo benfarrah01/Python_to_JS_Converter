@@ -1,8 +1,9 @@
 import sys
 import ast
-import escodegen
+#import escodegen
 
 # import scanning
+import generate_code
 import GenerateAST
 from pathlib import Path
 
@@ -78,8 +79,9 @@ def main():
         python_text = python_path.read_text().splitlines()
         tree = ast.parse(python_path.read_text())
         js_ast = GenerateAST.node_translation(tree)
-        final_code = translate(js_ast)
-        print(final_code)
+        generate_code.generate_code(js_ast)
+        #final_code = translate(js_ast)
+        #print(final_code)
         # print(python_text)
         # my_scanner = scanning.scanner(python_text)
         # my_scanner.scan()

@@ -1,0 +1,35 @@
+{
+    'type': 'Program', 
+    'body': [
+        {
+            'type': 'FunctionDeclaration', 
+            'id': 'greet', 
+            'params': [
+                {
+                    'type': 'Identifier', 
+                    'name': 'name'
+                }
+                ], 
+            'body': [
+                {
+                    'type': 'ExpressionStatement', 
+                    'expression': 
+                        {
+                            'type': 'CallExpression', 
+                            'callee': 
+                            {
+                                'type': 'Identifier', 
+                                'name': 'print'
+                            }, 
+                            'arguments': [
+                                {
+                                    'type': 'BinaryExpression', 
+                                    'operator': '+', 
+                                    'left': 
+                                        {
+                                        'type': 'Literal', 
+                                        'value': 'Hello, '
+                                        }, 
+                                    'right': None
+                                }
+                            ]}}]}, {'type': 'ExpressionStatement', 'expression': {'type': 'CallExpression', 'callee': {'type': 'Identifier', 'name': 'greet'}, 'arguments': [{'type': 'Literal', 'value': 'World'}]}}]}
