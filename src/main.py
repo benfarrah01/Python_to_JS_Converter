@@ -1,5 +1,6 @@
 import sys
 import ast
+import escodegen 
 
 # import scanning
 import GenerateAST
@@ -34,6 +35,9 @@ ast_node = {
     ],
 }
 
+def generate_code(code):
+    return escodegen.generate(code)
+
 
 def main():
     python_file = sys.argv[1]
@@ -42,7 +46,8 @@ def main():
         python_text = python_path.read_text().splitlines()
         tree = ast.parse(python_path.read_text())
         js_ast = GenerateAST.node_translation(tree)
-        print(js_ast)
+        final_code = generate_code(js_ast)
+        print(final_code)
         # print(python_text)
         # my_scanner = scanning.scanner(python_text)
         # my_scanner.scan()
