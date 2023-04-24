@@ -162,6 +162,12 @@ def node_translation(node):
             "alternate": node_translation(node.orelse[0]) if node.orelse else None,
         }
 
+    elif isinstance(node, ast.List):
+        return {
+            "type": "ArrayExpression",
+            "elements": [node_translation(element) for element in node.elts],
+        }
+
     else:
         raise Exception(f"Unsupported node type: {type(node).__name__}")
 
