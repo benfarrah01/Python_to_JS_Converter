@@ -12,18 +12,11 @@ code = []
 
 def generate_code(tree):
 
-    
-    #get_variables(tree)
     for key in tree:
         for expr in tree[key]:
             print(expr)
             print()
-            if type(expr) == str:
-                pass
-            elif expr['type'] == 'AssignmentExpression':
-                AssignmentExpression(expr)
-            elif expr['type'] == 'ExpressionStatement':
-                ExpressionStatement(expr)
+            find_expression(expr)
 
     # create variable initialization line
     names = js["variables"]["names"]
@@ -58,17 +51,57 @@ def generate_code(tree):
 #             else:
 #                 names_vals(expr)
 
+def find_expression(expr):
+    if type(expr) == str:
+        pass
+    elif expr['type'] == 'AssignmentExpression':
+        code.append(AssignmentExpression(expr))
+    elif expr['type'] == 'ExpressionStatement':
+        code.append(ExpressionStatement(expr))
+    elif expr['type'] == 'ForStatement':
+        ForStatement(expr)
+
 def AssignmentExpression(expr):
-    # get names and values of each variable
-    #js["variables"]["names"].append(expr['left']['name'])
-    code.append(f"var {expr['left']['name']};")
+    # Variable to control scoping. Default is function-scoped
+    scope = "var"
+    # Error handling, because there might not be a previous line in the code
+    try:
+        # Use block-scoping if the previous line sets up a new block
+        if "for" in code[-1]:
+            scope = "let"
+    except IndexError:
+        pass
+
+    # check if the AssignmentExpression is an Identifier
+        # return a line of JavaScript code
+
+    if expr['left']['type'] == 'MemberExpression':
+        return (f"{expr['object']['name']}")
+
     if expr['right']['type'] == 'Identifier':
-        #js["variables"]["values"].append(expr['right']['value'])
-        code.append(f"{expr['left']['name']} = {expr['right']['value']};")
+        return (f"{scope} {expr['left']['name']} = {expr['right']['value']};")
+    
+    # BinaryExpression
     elif expr['right']['type'] == 'BinaryExpression':
-        #js["variables"]["values"].append(f"{expr['right']['left']['name']} {expr['right']['operator']} {expr['right']['right']['name']}")
-        code.append(f"{expr['left']['name']} = {expr['right']['left']['name']} {expr['right']['operator']} {expr['right']['right']['name']};")
+        return (f"{scope} {expr['left']['name']} = {expr['right']['left']['name']} {expr['right']['operator']} {expr['right']['right']['name']};")
+    
+    # ArrayExpression
+    elif expr['right']['type'] == 'ArrayExpression':
+        elements = []
+        for i in expr['right']['elements']:
+            elements.append(i['value'])
+        return (f"{scope} {expr['left']['name']} = {elements};")
+    
+    
+
+
 
 def ExpressionStatement(expr):
     if expr['expression']['type'] == 'CallExpression':
-        code.append(f"console.log({expr['expression']['arguments'][0]['name']});")
+        return (f"console.log({expr['expression']['arguments'][0]['name']});")
+
+def ForStatement(expr):
+    code.append(f"for (let {expr['init']['name']} = 0; {expr['init']['name']} < {expr['test']['name']}.length; {expr['init']['name']}++)"+" {")
+    for i in expr['body']:
+        print(find_expression(i))
+        code.append(find_expression(i))

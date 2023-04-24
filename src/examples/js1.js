@@ -1,5 +1,4 @@
-var num1, num2, res;
-num1 = 5;
-num2 = 15;
-res = num1 + num2;
+var num1 = 5;
+var num2 = 15;
+var res = num1 + num2;
 console.log(res);
