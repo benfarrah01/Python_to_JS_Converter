@@ -3,8 +3,8 @@ import ast
 #import escodegen
 
 # import scanning
+import generate_ast
 import generate_code
-import GenerateAST
 from pathlib import Path
 
 
@@ -44,14 +44,8 @@ def main():
     if python_path.is_file():
         python_text = python_path.read_text().splitlines()
         tree = ast.parse(python_path.read_text())
-        js_ast = GenerateAST.node_translation(tree)
-        generate_code.generate_code(js_ast)
-        #final_code = translate(js_ast)
-        #print(final_code)
-        # print(python_text)
-        # my_scanner = scanning.scanner(python_text)
-        # my_scanner.scan()
-        # Generate JavaScript code from the AST
+        js_ast = generate_ast.node_translation(tree)
+        generate_code.generate(js_ast)
 
 
 if __name__ == "__main__":

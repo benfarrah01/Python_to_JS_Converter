@@ -10,7 +10,7 @@ js = {
 }
 code = []
 
-def generate_code(tree):
+def generate(tree):
 
     for key in tree:
         for expr in tree[key]:
