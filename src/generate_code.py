@@ -23,7 +23,6 @@ def generate_code(tree):
     print()
     for c in code:
         print(c)
-    
     # print(names)
     # for i in range(len(names)-1):
     #     code[0] = code[0]+(names[i]+", ")
@@ -55,15 +54,17 @@ def find_expression(expr):
     if type(expr) == str:
         pass
     elif expr['type'] == 'AssignmentExpression':
-        code.append(AssignmentExpression(expr))
+        AssignmentExpression(expr)
     elif expr['type'] == 'ExpressionStatement':
-        code.append(ExpressionStatement(expr))
+        ExpressionStatement(expr)
     elif expr['type'] == 'ForStatement':
         ForStatement(expr)
 
 def AssignmentExpression(expr):
     # Variable to control scoping. Default is function-scoped
     scope = "var"
+    left = ""
+    right = ""
     # Error handling, because there might not be a previous line in the code
     try:
         # Use block-scoping if the previous line sets up a new block
@@ -74,23 +75,39 @@ def AssignmentExpression(expr):
 
     # check if the AssignmentExpression is an Identifier
         # return a line of JavaScript code
+    
 
     if expr['left']['type'] == 'MemberExpression':
-        return (f"{expr['object']['name']}")
+        left = (f"\t{expr['left']['object']['name']}[{expr['left']['property']['name']}]")
+        if expr['right']['type'] == 'BinaryExpression':
+            operator = expr['right']['operator']
+            right = (f"{expr['right']['left']['object']['name']}[{expr['left']['property']['name']}] {operator} {expr['right']['right']['value']};")
+            operator = expr['operator']
+            code.append(f"{left} {operator} {right}")
+            return
+
+
+    elif expr['left']['type'] == 'Identifier':
+        left = (f"{scope} {expr['left']['name']}")
+
 
     if expr['right']['type'] == 'Identifier':
-        return (f"{scope} {expr['left']['name']} = {expr['right']['value']};")
+        right = (f"{expr['right']['value']};")
     
     # BinaryExpression
     elif expr['right']['type'] == 'BinaryExpression':
-        return (f"{scope} {expr['left']['name']} = {expr['right']['left']['name']} {expr['right']['operator']} {expr['right']['right']['name']};")
+        operator = expr['right']['operator']
+        right = (f"{expr['right']['left']['name']} {operator} {expr['right']['right']['name']};")
     
     # ArrayExpression
     elif expr['right']['type'] == 'ArrayExpression':
         elements = []
         for i in expr['right']['elements']:
             elements.append(i['value'])
-        return (f"{scope} {expr['left']['name']} = {elements};")
+        right = (f"{elements};")
+
+    operator = expr['operator']
+    code.append(f"{left} {operator} {right}")
     
     
 
@@ -98,10 +115,13 @@ def AssignmentExpression(expr):
 
 def ExpressionStatement(expr):
     if expr['expression']['type'] == 'CallExpression':
-        return (f"console.log({expr['expression']['arguments'][0]['name']});")
+        code.append(f"console.log({expr['expression']['arguments'][0]['name']});")
 
 def ForStatement(expr):
-    code.append(f"for (let {expr['init']['name']} = 0; {expr['init']['name']} < {expr['test']['name']}.length; {expr['init']['name']}++)"+" {")
-    for i in expr['body']:
-        print(find_expression(i))
-        code.append(find_expression(i))
+    body = ""
+    init = (f"for (let {expr['init']['name']} = 0; {expr['init']['name']} < {expr['test']['name']}.length; {expr['init']['name']}++)"+" {")
+    code.append(init)
+    for i in range(len(expr['body'])):
+        body = find_expression(expr['body'][i])
+            #print(body)
+    code.append("}")
