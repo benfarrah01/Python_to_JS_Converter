@@ -54,6 +54,9 @@ def main():
         # Pass AST into generate() to get translated JavaScript code
         generate_code.generate(js_ast)
 
+        
+
+
 
 if __name__ == "__main__":
     main()
