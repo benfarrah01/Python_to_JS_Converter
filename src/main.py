@@ -46,13 +46,37 @@ def main():
     # Check if the path leads to a file
     if python_path.is_file():
         # Read the text from the file, store in string. Parse the string to get a Module object (from AST).
-        tree = ast.parse(python_path.read_text())
+        text = python_path.read_text()
+        tree = ast.parse(text)
 
         # Pass tree into node_translation() to get AST
         js_ast = generate_ast.node_translation(tree)
 
+        # create list of strings, each element is a line from the original python code
+        textlist = text.splitlines()
+
+        # create list of expressions
+        exprlist = []
+        for key in js_ast:
+            for expr in js_ast[key]:
+                # Print expression for testing purposes, DELETE THIS LINE LATER
+                if type(expr) == str:
+                    pass
+                else:
+                    exprlist.append(expr)
+                    
+
+        # add commented lines to list of expressions
+        for i in range(len(textlist)):
+            if "#" in textlist[i]:
+                exprlist.insert(i, {
+                    "type": "Comment",
+                    "value": textlist[i].replace("#","")
+                })
+
+
         # Pass AST into generate() to get translated JavaScript code
-        generate_code.generate(js_ast)
+        generate_code.generate(exprlist)
 
 
 if __name__ == "__main__":

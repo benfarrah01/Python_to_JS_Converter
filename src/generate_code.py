@@ -2,18 +2,12 @@
     # Each element is a string representation of a line of code
 code = []
 
-def generate(tree):
+def generate(exprlist):
     # Iterate through each tree to get expressions
-    for key in tree:
-        for expr in tree[key]:
-            # Print expression for testing purposes, DELETE THIS LINE LATER
-            if type(expr) == str:
-                pass
-            else:
-                print(expr)
-            print()
-            # Match each expression with its expression type, handle accordingly
-            find_expression(expr)
+    for expr in exprlist:
+    # Match each expression with its expression type, handle accordingly
+        find_expression(expr)
+        #print(f"Current: {expr}")
 
     print()
     # Print each line of translated JavaScript code
@@ -30,6 +24,8 @@ def find_expression(expr):
         ExpressionStatement(expr)
     elif expr['type'] == 'ForStatement':
         ForStatement(expr)
+    elif expr['type'] == 'Comment':
+        Comment(expr)
 
 
 def AssignmentExpression(expr):
@@ -110,3 +106,7 @@ def ForStatement(expr):
         body = find_expression(expr['body'][i])
             #print(body)
     code.append("}")
+
+# Handle comments
+def Comment(expr):
+    code.append(f"// {expr['value']}")

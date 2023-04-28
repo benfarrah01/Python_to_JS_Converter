@@ -182,7 +182,6 @@ def node_translation(node):
             "property": node_translation(node.slice),
             "computed": True,
         }
-
     else:
         raise Exception(f"Unsupported node type: {type(node).__name__}")
 
