@@ -1,5 +1,8 @@
 # Empty list to store translated code
     # Each element is a string representation of a line of code
+import re
+
+
 code = []
 
 def generate(exprlist):

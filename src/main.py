@@ -2,6 +2,7 @@ import sys
 import ast
 import generate_ast
 import generate_code
+import comments
 from pathlib import Path
 
 
@@ -55,28 +56,14 @@ def main():
         # create list of strings, each element is a line from the original python code
         textlist = text.splitlines()
 
-        # create list of expressions
-        exprlist = []
-        for key in js_ast:
-            for expr in js_ast[key]:
-                # Print expression for testing purposes, DELETE THIS LINE LATER
-                if type(expr) == str:
-                    pass
-                else:
-                    exprlist.append(expr)
-                    
-
-        # add commented lines to list of expressions
-        for i in range(len(textlist)):
-            if "#" in textlist[i]:
-                exprlist.insert(i, {
-                    "type": "Comment",
-                    "value": textlist[i].replace("#","")
-                })
-
+        # get comments from python code, add them into list of expressions from js_ast
+        exprlist = comments.comments(js_ast, textlist)
 
         # Pass AST into generate() to get translated JavaScript code
         generate_code.generate(exprlist)
+
+        
+
 
 
 if __name__ == "__main__":

@@ -185,14 +185,3 @@ def node_translation(node):
     else:
         raise Exception(f"Unsupported node type: {type(node).__name__}")
 
-
-# # Example source code
-# source_code = """
-# def greet(name):
-#     print(f'Hello, {name}!')
-
-# greet('World')"""
-
-# tree = ast.parse(source_code)
-# js_ast = node_translation(tree)
-# print(js_ast)
