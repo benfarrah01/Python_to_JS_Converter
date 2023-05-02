@@ -14,6 +14,7 @@ def generate(exprlist):
 
     print()
     # Print each line of translated JavaScript code
+    return code
     for c in code:
         print(c)
 
