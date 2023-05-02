@@ -1,7 +1,22 @@
-# Empty list to store translated code
-    # Each element is a string representation of a line of code
-import re
+"""
+This module converts a JavaScript AST to JavaScript code.
 
+The list of strings `code` stores the translated code. Each element in the list is a line of JavaScript code.
+
+The generate function controls the execution of the other functions. It accepts a list of expressions from a JavaScript AST and passes them to find_expression().
+
+The find_expression function finds the type of an expression and passes it to the proper function to handle it. These functions are AssignmentExpression(), ExpressionStatement(), ForStatement(), and Comment(). Each of these comments appends the translated code to the list of strings `code`.
+
+The AssignmentExpression function determines how each node in the expression should be translated. It can translate Identifier nodes, BinaryExpression nodes, MemberExpression nodes, and ArrayExpression nodes.
+
+The ExpressionStatement function can translate ExpressionStatement expressions to JavaScript code. This function currently can translate print statements.
+
+The Comment function can translats comment expressions to JavaScript style comments.
+
+Usage:
+    The generate function can be called with a list of JavaScript AST Expressions.
+
+"""
 
 code = []
 
@@ -15,8 +30,6 @@ def generate(exprlist):
     print()
     # Print each line of translated JavaScript code
     return code
-    for c in code:
-        print(c)
 
 
 def find_expression(expr):
