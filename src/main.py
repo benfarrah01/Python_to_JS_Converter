@@ -73,7 +73,11 @@ def main():
         exprlist = comments.comments(js_ast, textlist)
 
         # Pass AST into generate() to get translated JavaScript code
-        generate_code.generate(exprlist)
+        output = generate_code.generate(exprlist)
+        
+        # Display the output
+        for line in output:
+            print(line)
 
         
 
