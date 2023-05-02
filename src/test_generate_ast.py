@@ -142,17 +142,21 @@ while i < 10:
             "type": "BinaryExpression",
             "operator": "<",
             "left": {"type": "Identifier", "name": "i"},
-            "right": {"type": "Literal", "value": 10},
+            "right": {"type": "Identifier", "value": 10},
         },
         "body": [
             {
-                "type": "ExpressionStatement",
-                "expression": {
-                    "type": "AssignmentExpression",
-                    "operator": "+=",
-                    "left": {"type": "Identifier", "name": "i"},
-                    "right": {"type": "Literal", "value": 1},
-                },
+                # "type": "ExpressionStatement",
+                # "expression": {
+                #     "type": "AssignmentExpression",
+                #     "operator": "+=",
+                #     "left": {"type": "Identifier", "name": "i"},
+                #     "right": {"type": "Literal", "value": 1},
+                # },
+                "type": "AssignmentExpression",
+                "operator": "+=",
+                "left": {"type": "Identifier", "name": "i"},
+                "right": {"type": "Identifier", "value": 1},
             }
         ],
     }
