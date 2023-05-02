@@ -63,6 +63,9 @@ for (let i = 0; i < my_list.length; i++) {
 console.log(my_list);
 ```
 
+### Test 3
+This test is too long to include its input and output in the report, but everything about it works correctly. It can be run with the command `python main.py examples/py3.py`.
+
 : include commands needed to run and test your project
 
 ```
@@ -77,6 +80,11 @@ python main.py examples/py1.py
 Example2:
 ```
 python main.py examples/py2.py
+```
+
+Example3:
+```
+python main.py examples/py3.py
 ```
 
 ## Description of the challenges that you faced and how you resolved them
