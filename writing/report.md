@@ -85,6 +85,6 @@ The first thing that was challenges as team was getting used to working with the
 
 ## If worked in a team, description of the way in which you and your team members shared the project workload
 
-- Bergas: Worked on `generate_ast.py` on building the nodes and created test cases. Test cases are made using pytest, therefore if want to run the test cases using pytest, has to install pytest on local environment using `pip install pytest`. Nodes are needed to check instances of Python AST to convert to Javascript AST
-- Ben: Worked on `generate_code.py` which handle the part that converts the ast to code. This functionality manually converts instances of the Javascript AST to Javascript code
+- Bergas: Worked on `generate_ast.py` on building the nodes and created test cases. Test cases are made using pytest, therefore if want to run the test cases using pytest, has to install pytest on local environment using `pip install pytest`. Nodes are needed to check instances of Python AST to convert to Javascript AST.
+- Ben: Worked on `generate_code.py` which handles the part that converts the ast to code. This functionality manually converts instances of the Javascript AST to Javascript code. It can translate expressions of type AssignmentExpression, ExpressionStatement, ForStatement, and Comment.
 - Daniel: worked on `Main.py` and `generate_ast.py` with creating node for different functionalities. This functionality drives the whole program as the `main.py` function is the driver program, while also adding functionality to instances of nodes inside `generate_ast.py`.
