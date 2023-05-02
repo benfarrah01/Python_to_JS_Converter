@@ -6,6 +6,7 @@ import sys
 operator_map = {
     ast.Add: "+",
     ast.Sub: "-",
+    ast.USub: "-",
     ast.Mult: "*",
     ast.Div: "/",
     ast.Mod: "%",
@@ -30,7 +31,6 @@ js_ops = {
     ast.In: "In",
     ast.NotIn: "not in",
 }
-
 
 def node_translation(node):
     # Module Node
@@ -113,18 +113,22 @@ def node_translation(node):
     # Compare operations, checks between left, right and operator.
     elif isinstance(node, ast.Compare):
         left = node_translation(node.left)
-        right = node_translation(node.comparators[0])
-        op = js_ops[node.ops[0]]
-        for i in range(1, len(node.ops)):
-            op_node = node.ops[i]
-            right_node = node.comparators[1]
-            op = f"{op} {js_ops[type(op_node)]} {node_translation(right_node)}"
+        ops = [js_ops[op.__class__] for op in node.ops]
+        comparators = [node_translation(comp) for comp in node.comparators]
+        op = " ".join(ops)
+        right = comparators[0]
+        if len(comparators) > 1:
+            for i in range(1, len(comparators)):
+                op_node = ops[i - 1]
+                right_node = comparators[i]
+                op = f"{op} {op_node} {right_node}"
         return {
             "type": "BinaryExpression",
             "left": left,
             "operator": op,
             "right": right,
         }
+
     elif isinstance(node, ast.For):
         return {
             "type": "ForStatement",
@@ -144,10 +148,11 @@ def node_translation(node):
 
     elif isinstance(node, ast.While):
         return {
-            "type": "WhileStatement",
-            "test": node_translation(node.test),
-            "body": [node_translation(child) for child in node.body],
-        }
+        "type": "WhileStatement",
+        "test": node_translation(node.test),
+        "body": [node_translation(child) for child in node.body],
+    }
+
     elif isinstance(node, ast.Break):
         return {"type": "BreakStatement"}
     elif isinstance(node, ast.Continue):
@@ -182,6 +187,13 @@ def node_translation(node):
             "property": node_translation(node.slice),
             "computed": True,
         }
+    elif isinstance(node, ast.AugAssign):
+        return {
+        "type": "AssignmentExpression",
+        "operator": operator_map[node.op.__class__] + "=",
+        "left": node_translation(node.target),
+        "right": node_translation(node.value),
+    }
     else:
         raise Exception(f"Unsupported node type: {type(node).__name__}")
 
