@@ -27,6 +27,6 @@ The first thing that was chanllenges as team was getting used to working with th
 
 ## If worked in a team, description of the way in which you and your team members shared the project workload
 
-Bergas: Worked on generate_ast on building the nodes and created test cases. 
-Ben: Worked on Generate_code which handle the part that converts the ast to code.
-Daniel: worked on Main and genrate_ast with creating node for differnt fucntionalilies. 
+- Bergas: Worked on generate_ast on building the nodes and created test cases. 
+- Ben: Worked on Generate_code which handle the part that converts the ast to code.
+- Daniel: worked on Main and genrate_ast with creating node for differnt fucntionalilies. 
