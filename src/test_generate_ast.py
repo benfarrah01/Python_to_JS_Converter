@@ -146,13 +146,6 @@ while i < 10:
         },
         "body": [
             {
-                # "type": "ExpressionStatement",
-                # "expression": {
-                #     "type": "AssignmentExpression",
-                #     "operator": "+=",
-                #     "left": {"type": "Identifier", "name": "i"},
-                #     "right": {"type": "Literal", "value": 1},
-                # },
                 "type": "AssignmentExpression",
                 "operator": "+=",
                 "left": {"type": "Identifier", "name": "i"},
