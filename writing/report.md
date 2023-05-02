@@ -1,4 +1,7 @@
 # Report by Add Your Name(s)
+- Ben 
+- Bergas
+- Daniel 
 
 ## Design of your project
 
@@ -20,8 +23,10 @@ TODO: include commands needed to run and test your project
 
 ## Description of the challenges that you faced and how you resolved them
 
-TODO
+The first thing that was chanllenges as team was getting used to working with the python ast library and utilize it to the speficies that we were looking for. The next Hardle we faced was at end after getting the JS ast trying to pasre it and work through to get it to a code.
 
 ## If worked in a team, description of the way in which you and your team members shared the project workload
 
-TODO
+Bergas: Worked on generate_ast and building the required nodes
+Ben: Worked on Generate_code which handle the part that converts the ast to code.
+Daniel: 
