@@ -2,7 +2,6 @@ import pytest
 import generate_code
 
 def test_generate_returns_translated_AssignmentExpression_left_identifier_right_identifier():
-    """ Tests that an AssignmentExpression, with left and right nodes as identifiers, can be correctly translated from Python to JavaScript."""
     expr = [
         {
             "type": "AssignmentExpression",
@@ -20,7 +19,6 @@ def test_generate_returns_translated_AssignmentExpression_left_identifier_right_
     assert output == expected_output
 
 def test_generate_returns_translated_AssignmentExpression_left_identifier_right_BinaryExpression():
-    """ Tests that an AssignmentExpression, with left node as identifier and right node as a BinaryExpression, can be correctly translated from Python to JavaScript."""
     expr = [
         {'type': 'AssignmentExpression', 'operator': '=', 'left': {'type': 'Identifier', 'name': 'num1'}, 'right': {'type': 'Identifier', 'value': 5}},
         {'type': 'AssignmentExpression', 'operator': '=', 'left': {'type': 'Identifier', 'name': 'num2'}, 'right': {'type': 'Identifier', 'value': 15}},
