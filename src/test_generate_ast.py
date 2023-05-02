@@ -1,3 +1,11 @@
+"""
+This program contains a set of unit tests for the node_translation function from the generate_ast module, which translates Python AST (Abstract Syntax Tree) nodes to their equivalent JavaScript AST nodes.
+
+Each unit test calls the function with different AST nodes as inputs, and compares the output with an expected output. It checks for various types of AST nodes such as Program, FunctionDef and more. The expected output for each unit test is defined as a JavaScript AST node, which is a nested dictionary containing a type key, and other keys representing the attributes of the JavaScript node.
+
+This program uses the pytest framework to define and execute the unit tests.
+"""
+
 import pytest
 import ast
 from generate_ast import node_translation

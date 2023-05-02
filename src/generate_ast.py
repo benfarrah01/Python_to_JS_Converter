@@ -1,7 +1,19 @@
+"""
+This module contains a Python to JavaScript converter using the Abstract Syntax Tree (AST) of Python.
+
+The `node_translation` function in this module takes an AST node of Python and returns equivalent JavaScript AST node.
+The JavaScript AST node is represented as a Python dictionary with keys such as "type", "id", "params", "body", "argument", etc.
+
+The `operator_map` dictionary maps Python operators to their equivalent JavaScript operators, and the `js_ops` dictionary maps Python comparison operators to their equivalent JavaScript operators.
+
+Usage:
+    The `node_translation` function can be called with any valid Python AST node given from its equivalent Python Code as an argument to obtain its equivalent JavaScript AST node.
+
+"""
+
+
 import ast
 import sys
-
-# from rich.console import Console
 
 operator_map = {
     ast.Add: "+",

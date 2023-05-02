@@ -1,3 +1,16 @@
+"""
+This program reads in a path to a Python file from command line argument and translates it into JavaScript code.
+It converts the Python code into an Abstract Syntax Tree (AST) using the ast module, and then translates the AST
+into a JavaScript AST using the generate_ast module. It then extracts comments from the original Python code,
+and adds them into the JavaScript AST using the comments module. Finally, it uses the generate_code module to
+generate JavaScript code from the JavaScript AST, and prints the resulting code to the console.
+
+Sample JavaScript AST as a Python dictionary is included to demonstrate the sample output for the each given program.
+
+Usage:
+python main.py /path/to/python/file.py
+"""
+
 import sys
 import ast
 import generate_ast
