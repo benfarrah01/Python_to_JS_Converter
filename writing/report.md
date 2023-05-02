@@ -20,6 +20,7 @@ The program takes Python code as an input and returns equivalent JavaScript code
 
 : include program input and output and output of test cases in code blocks
 
+### Test 1
 Input:
 ```
 # comment
@@ -40,15 +41,42 @@ var res = num1 + num2;
 console.log(res);
 ```
 
+### Test 2
+Input:
+```
+# comments
+my_list = [1,2,3,4]
+new_list = []
+for i in my_list:
+    new_list[i] = my_list[i] + 1
+print(my_list)
+```
+
+Output: 
+```
+//  comments
+var my_list = [1, 2, 3, 4];
+var new_list = [];
+for (let i = 0; i < my_list.length; i++) {
+        new_list[i] = my_list[i] + 1;
+}
+console.log(my_list);
+```
+
 : include commands needed to run and test your project
 
 ```
 python main.py examples/name_of_python_program.py
 ```
 
-Example: 
+Example1: 
 ```
 python main.py examples/py1.py
+```
+
+Example2:
+```
+python main.py examples/py2.py
 ```
 
 ## Description of the challenges that you faced and how you resolved them
