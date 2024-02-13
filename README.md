@@ -1,24 +1,18 @@
-# Report by Add Your Name(s)
-- Ben 
-- Bergas
-- Daniel 
+# Contributors
+- Ben Farrah 
+- Bergas Anargya
+- Daniel Bekele
 
-## Design of your project
-
-: include a diagram
+## Project Design
 
 Our program is a translator that accepts Python code and outputs a version that has been translated to JavaScript. The resulting JavaScript program will have the same output and exact same functionality as the original Python program. It can accept different types of programs and different functionalities that Python code has such as for loops, while loops, if statements and more. 
 
 ![Diagram](/Diagram_for_CS201.png)
 ## Implementation of your project
 
-: include information about technical details of your project, including all tools and programming languages used.
-
 The program takes Python code as an input and returns equivalent JavaScript code. It includes a scanner and parser that parses the Python code into a syntax tree, similar to the functionality of parts of the Lox interpreter. The translator part of the program uses the python ast library to making sure to account for all the different kinds of structures, loops, and other features present in our input Python programs. This will convert the Python AST to a JavaScript AST. Then, the main will convert the JavaScript AST into actual JavaScript code using the translator.
 
-## Evaluation and Testing of your Program
-
-: include program input and output and output of test cases in code blocks
+## Evaluation and Testing
 
 ### Test 1
 Input:
@@ -87,11 +81,11 @@ Example3:
 python main.py examples/py3.py
 ```
 
-## Description of the challenges that you faced and how you resolved them
+## Challenges Faced
 
 The first thing that was challenges as team was getting used to working with the python ast library and utilize it to the specifies that we were looking for. The main reason is because we do not have the experience with this library, therefore it would need more time in order to use the library, since this is useful on parsing the Python AST to the Javascript AST into the dictionary format based of instances of objects. The next hurdle we faced was at the end after getting the JS ast trying to parse it and work through to get it to a code. The main reason is because we tried using another library for this functionality called `escodegen` which helps translate Javascript AST to code, however we have problem with using the library. We settled on creating the translation manually for each instances inside the Javascript AST. 
 
-## If worked in a team, description of the way in which you and your team members shared the project workload
+## Contributions Description
 
 - Bergas: Worked on `generate_ast.py` on building the nodes and created test cases. Test cases are made using pytest, therefore if want to run the test cases using pytest, has to install pytest on local environment using `pip install pytest`. Nodes are needed to check instances of Python AST to convert to Javascript AST.
 - Ben: Worked on `generate_code.py` which handles the part that converts the ast to code. This functionality manually converts instances of the Javascript AST to Javascript code. It can translate expressions of type AssignmentExpression, ExpressionStatement, ForStatement, and Comment.
