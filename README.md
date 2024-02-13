@@ -8,7 +8,7 @@
 Our program is a translator that accepts Python code and outputs a version that has been translated to JavaScript. The resulting JavaScript program will have the same output and exact same functionality as the original Python program. It can accept different types of programs and different functionalities that Python code has such as for loops, while loops, if statements and more. 
 
 ![Diagram](/Diagram_for_CS201.png)
-## Implementation of your project
+## Implementation
 
 The program takes Python code as an input and returns equivalent JavaScript code. It includes a scanner and parser that parses the Python code into a syntax tree, similar to the functionality of parts of the Lox interpreter. The translator part of the program uses the python ast library to making sure to account for all the different kinds of structures, loops, and other features present in our input Python programs. This will convert the Python AST to a JavaScript AST. Then, the main will convert the JavaScript AST into actual JavaScript code using the translator.
 
